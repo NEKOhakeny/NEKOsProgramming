@@ -1,0 +1,53 @@
+#include<iostream>
+#include<algorithm>
+#include<functional>
+
+using namespace std;
+int euqlid(int,int);
+int main(void){
+  int n,a,b,c;
+  int sum;
+  cin >> n;
+  cin >> a >> b >> c;
+  int B = max(b,c);
+  int C = min(b,c);
+  int div = euqlid(B,C);
+  int x = 0;
+  int right = n - a * x;
+  while(right % div == 0){
+    x++;
+  }
+  int number = right / div;
+  cout<<x<<endl;
+  int ans ;  
+  int tru = 0;
+  for(int y = 0; y < n ; y++){
+    for(int z = 0; z < n ; z++){
+      int left = b * y + c * z;
+      if(right == left){
+        tru = 1;
+        ans = x + y + z;
+        break;
+      }
+    }
+    if(tru == 1 )break;
+  }
+  cout<<ans<<endl;
+  
+   
+  return 0;
+}
+
+int euqlid(int B, int C){
+  int A;
+  while(C != 0){
+    A = B;
+    B = C;
+    C = A % B;
+  }
+  return B;
+}
+
+      
+      
+

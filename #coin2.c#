@@ -1,0 +1,7 @@
+#include<stdio.h>
+
+int main(void){
+  int N,coin[3];
+  scanf("%d%d%d
+
+  

@@ -1,0 +1,16 @@
+
+sizeof(d_array) is 1
+sizeof(c_array) is 1
+sizeof(c_2d_array) is 1
+sizeof(str_array) is 1
+
+sizeof(d_array) is 1
+sizeof(c_array) is 1
+sizeof(c_2d_array) is 1
+sizeof(str_array) is 1
+
+sizeof(d_array) is 1
+sizeof(c_array) is 1
+sizeof(c_2d_array) is 1
+sizeof(str_array) is 1
+

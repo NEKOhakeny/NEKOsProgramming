@@ -1,0 +1,37 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<vector>
+#define rep(a,b,c) for(int a = b; a < c ; a++)
+using namespace std;
+int main(void){
+    double x,y,s;
+    while(1){
+      cin>>x>>y>>s;
+      int max = 0;
+      double before;
+      if(x == y && y == s && s == 0)break;
+      
+      rep(i,1,s){
+        rep(j,1,s){
+	  double sum = i + j;
+	  before = sum * (100 + x) / 100;
+	  if(before <= s-1 || before > s)continue;
+	  double after = sum * (100 + y) /100;
+	  if(after >= max)max = after + 1;
+        }
+      }
+      if(max - (int)max > 0)cout<<(int)max + 1<<endl;
+      else cout<<(int)max<<endl;
+    }
+    return 0;
+    
+    
+
+    
+
+    
+    
+
+}
+B

@@ -1,0 +1,54 @@
+#include<iostream>
+#include<limits.h>
+#include<stdio.h>
+#define rep(a,b,c) for(int a = b; a < c ;a++)
+int loop(int,int,int);
+using namespace std;
+
+int main(void){
+    while(1){
+        int a[4];
+        int size = 0;
+        rep(i,0,4){
+            int number;
+            cin>>number;
+            a[size] = number;
+            if(number != 0){
+                size++;
+            }
+        }
+        if(size == 0)break;
+        while(1){
+            int count = 0;
+            int min = INT_MAX;
+            rep(i,0,size){
+                if(min > a[i] && a[i] != 0){
+                    min = a[i];
+                }
+            }
+            rep(i,0,size){
+                if(a[i] > min)a[i] = a[i] - min;
+                if(a[i] == 0)count++;
+            }
+
+            
+            if(count == size - 1)break;
+        }
+        rep(i,0,size){
+            if(a[i] != 0){
+            cout<<a[i]<<endl;
+            break;
+        }
+        
+    
+    }
+    }
+    return 0;
+
+
+    
+
+
+    
+
+}
