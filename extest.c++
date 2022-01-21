@@ -12,20 +12,40 @@ typedef struct node{
     struct node *right = NULL;
     struct node *parent = NULL;
 }tree ;
+
+//ノードを探索する関数
 int cmpnode(int,int,tree **,tree *);
+
+//新しいノードを作る関数
 void createnode(int, tree **,tree *);
-void inorder(tree *);
-/*void deletenode(tree *);
+
+//ノードの削除に関連する関数
+void deletenode(tree *);
 tree* searchright(tree *);
 tree* searchleft(tree *);
- */
+void deleteright(tree *);
+void deleteleft(tree *);
+
+//ノードを出力する関数
+void preorder(tree *);
+void inorder(tree *);
+void postorder(tree *);
+void println(tree *);
+
+//先頭のノードポインタ
 tree* head = NULL;
+
+
 int main(void){
     int n;
     cin>>n;
     rep(i,0,n){
         string str;
         cin>>str;
+        if(str == "print"){
+            println(head);
+            continue;
+        }
         int m;
         cin>>m;
         if(str == "insert"){
@@ -38,23 +58,29 @@ int main(void){
                 cout<<"no"<<endl;
             }
             else cout<<"yes"<<endl;
-        }/*else if(str == "delete"){
+        }else if(str == "delete"){
             if(cmpnode(2,m,&head,NULL) == 1)cout<<"This key dose not exist."<<endl;
-        }*/
-        inorder(head);
-        cout<<endl;
+        }
+        //preorder(head);
+        //cout<<endl;
     }
     return 0;
+
 }
+
+
+//ノードを探索する関数
 int cmpnode(int i,int m,tree **PPnode,tree *Pnode){
     if((*PPnode) != NULL){
         if((*PPnode)->id > m) return cmpnode(i,m,&(*PPnode)->left,*PPnode);
         else if((*PPnode)->id == m){
-            /*if( i == 2){
+            if( i == 2){
+                //cout<<"node";
+                //cout<<(*PPnode)->id<<endl;
                 deletenode(*PPnode);
                 return 0;
             }
-            else */return 0;
+            else return 0;
         }
         else return cmpnode(i,m,&(*PPnode)->right,*PPnode);
     }
@@ -63,43 +89,91 @@ int cmpnode(int i,int m,tree **PPnode,tree *Pnode){
     //cout<<(*Pnode)->id<<endl;
     return 1;
 }
+
+//新しいノードを作る
 void createnode(int m,tree **PPnode,tree *Pnode){
     (*PPnode) = (tree *)malloc(sizeof(tree));
     (*PPnode)->id = m;
     (*PPnode)->parent = Pnode;
     return ;
 }
+
+//指定したノードを探索＆削除
+void deletenode(tree *Pnode){
+    if(Pnode->right != NULL)deleteright(Pnode);
+    else if(Pnode->left != NULL)deleteleft(Pnode);
+    else {
+        int m = Pnode->parent->id;
+        if(m > Pnode->id)Pnode->parent->left = NULL;
+        else Pnode->parent->right = NULL;
+        free(Pnode);
+    }
+}
+void deleteright(tree *Pnode){
+    tree *newnode = searchright(Pnode->right);
+    Pnode->id = newnode->id;
+    if(newnode->right != NULL)deleteright(newnode);
+    else{
+        newnode->parent->right = NULL;
+        free (newnode);
+    }
+
+
+
+}
+void deleteleft(tree *Pnode){
+    tree *newnode = searchleft(Pnode->left);
+    Pnode->id = newnode->id;
+    if(newnode->left != NULL)deleteleft(newnode);
+    else {
+        newnode->parent->left = NULL;
+        free(newnode);
+
+    }
+}
+tree*  searchright(tree *Pnode){
+    //cout<<Pnode->id<<endl;
+    if(Pnode->left !=  NULL)return searchright(Pnode->left);
+    //cout<<Pnode->id<<endl;
+    return Pnode;
+}
+
+
+tree* searchleft(tree *Pnode){
+    //cout<<Pnode->id<<endl;
+    if(Pnode->right != NULL)return searchleft(Pnode->right);
+    //cout<<Pnode->id<<endl;
+    return Pnode;
+}
+ 
+ //出力関数
+
+void preorder(tree *Pnode){
+    cout<<" ";
+    cout<<Pnode->id;
+    if(Pnode->left != NULL)preorder(Pnode->left);
+    if(Pnode->right != NULL)preorder(Pnode->right);
+}
+
+
 void inorder(tree *Pnode){
     if(Pnode->left != NULL)inorder(Pnode->left);
     cout<<" ";
     cout<<Pnode->id;
     if(Pnode->right != NULL)inorder(Pnode->right);
 }
-/*
-void deletenode(tree *Pnode){
-    if(Pnode->parent != NULL){
-        int m = Pnode->parent->id;
-        tree *node;
-        tree **PPnode;
-        if(m > Pnode->parent->id)(*PPnode) = Pnode->parent->right;
-        else (*PPnode) = Pnode->parent->left;
-        if(Pnode ->right != NULL) node = searchright(Pnode->right); 
-        else if(Pnode-> left != NULL )node = searchleft(Pnode->left);
-        else node = NULL;
-        node->parent = Pnode->parent;
-        (*PPnode) = node;
-    }
-    free(Pnode);
-    return;
+void postorder(tree *Pnode){
+    if(Pnode->left != NULL)postorder(Pnode->left);
+    if(Pnode->right != NULL)postorder(Pnode->right);
+    cout<<" ";
+    cout<<Pnode->id;
+}
+void println(tree *head){
+    inorder(head);
+    cout<<endl;
+    preorder(head);
+    cout<<endl;
+    
+    return ;
 }
 
-tree* serachright(tree *Pnode){
-    if(Pnode->left !=  NULL)return searchright(Pnode->left);
-    return Pnode;
-}
-
-tree* searchleft(tree *Pnode){
-    if(Pnode->right != NULL)return searchleft(Pnode->right);
-    return Pnode;
-}
- */
