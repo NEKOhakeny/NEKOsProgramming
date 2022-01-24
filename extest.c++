@@ -21,6 +21,7 @@ void createnode(int, tree **,tree *);
 
 //ノードの削除に関連する関数
 void deletenode(tree *);
+void cmpnode2(tree **);
 tree* searchright(tree *);
 tree* searchleft(tree *);
 void deleteright(tree *);
@@ -61,8 +62,8 @@ int main(void){
         }else if(str == "delete"){
             if(cmpnode(2,m,&head,NULL) == 1)cout<<"This key dose not exist."<<endl;
         }
-        //preorder(head);
-        //cout<<endl;
+        preorder(head);
+        cout<<endl;
     }
     return 0;
 
@@ -98,47 +99,69 @@ void createnode(int m,tree **PPnode,tree *Pnode){
     return ;
 }
 
-//指定したノードを探索＆削除
+
+//ノードの削除に関する
 void deletenode(tree *Pnode){
+    check;
     if(Pnode->right != NULL)deleteright(Pnode);
     else if(Pnode->left != NULL)deleteleft(Pnode);
     else {
-        int m = Pnode->parent->id;
-        if(m > Pnode->id)Pnode->parent->left = NULL;
-        else Pnode->parent->right = NULL;
+        check;
+        if(Pnode->parent != NULL)cmpnode2(&Pnode);
         free(Pnode);
     }
+    
+
 }
-void deleteright(tree *Pnode){
-    tree *newnode = searchright(Pnode->right);
-    Pnode->id = newnode->id;
-    if(newnode->right != NULL)deleteright(newnode);
-    else{
-        newnode->parent->right = NULL;
-        free (newnode);
+
+
+void cmpnode2(tree **Pnode){
+    //cout<<"clear"<<endl;
+    cout<<(*Pnode)->id<<endl;
+    int m = (*Pnode)->parent->id;
+    cout<<m<<endl;
+    if(m > (*Pnode)->id){
+        (*Pnode)->parent->left = NULL;
     }
+    else (*Pnode)->parent->right = NULL;
+    check;
+    
+}
 
 
 
+void deleteright(tree * Pnode){
+    check;
+    if(Pnode->right == NULL){
+        cmpnode2(&Pnode);
+        free(Pnode);
+        return;
+    }
+    tree *newkey = searchright(Pnode->right);
+    Pnode->id = newkey->id;
+    deleteright(newkey);
 }
 void deleteleft(tree *Pnode){
-    tree *newnode = searchleft(Pnode->left);
-    Pnode->id = newnode->id;
-    if(newnode->left != NULL)deleteleft(newnode);
-    else {
-        newnode->parent->left = NULL;
-        free(newnode);
-
+    //check;
+    if(Pnode->left == NULL){
+        cmpnode2(&Pnode);
+        free(Pnode);
+        return;
     }
+    tree *newkey = searchleft(Pnode->left);
+    Pnode->id = newkey->id;
+    deleteleft(newkey);
 }
+
+
+
+
 tree*  searchright(tree *Pnode){
     //cout<<Pnode->id<<endl;
     if(Pnode->left !=  NULL)return searchright(Pnode->left);
     //cout<<Pnode->id<<endl;
     return Pnode;
 }
-
-
 tree* searchleft(tree *Pnode){
     //cout<<Pnode->id<<endl;
     if(Pnode->right != NULL)return searchleft(Pnode->right);
