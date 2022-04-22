@@ -1,0 +1,3 @@
+methodOne are overriden in classB .
+method three are hiden in classsB.
+other method simply defined agein in classB and behaved as superclass method

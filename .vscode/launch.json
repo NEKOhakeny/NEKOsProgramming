@@ -1,0 +1,63 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "prog_5186d67a"
+        },
+        {
+            "type": "java",
+            "name": "Launch Car",
+            "request": "launch",
+            "mainClass": "Car",
+            "projectName": "prog_5186d67a"
+        },
+        {
+            "type": "java",
+            "name": "Launch RobotApplication",
+            "request": "launch",
+            "mainClass": "RobotApplication",
+            "projectName": "prog_5186d67a"
+        },
+        {
+            "type": "java",
+            "name": "Launch cp3_6",
+            "request": "launch",
+            "mainClass": "cp3_6",
+            "projectName": "prog_5186d67a"
+        },
+        {
+            "type": "java",
+            "name": "Launch cp3_3",
+            "request": "launch",
+            "mainClass": "cp3_3",
+            "projectName": "prog_5186d67a"
+        },
+        {
+            "name": "(lldb) 接続",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "プログラム名を入力してください (例: ${workspaceFolder}/a.out)",
+            "processId": "${command:pickProcess}",
+            "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) 起動",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "プログラム名を入力してください (例: ${workspaceFolder}/a.out)",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+    ]
+}
